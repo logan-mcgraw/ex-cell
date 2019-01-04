@@ -1,4 +1,4 @@
-#Logan McGraw
+ #Logan McGraw
 #Ex-cell, 1/3/19
 
 import openpyxl, time
@@ -36,7 +36,7 @@ cs = ['A', 'C', 'D', 'E', 'F']
 n = 0
 
 #move data from source sheet to lists
-while n <= 1-len(cs): 
+while n <= len(cs)-1: 
     for i in columns[n]:
         lists[n] += [i.value]
     del lists[n][0] #removes title from top of data
