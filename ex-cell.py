@@ -50,7 +50,7 @@ while test.value != None: #goes down the column until an empty cell (with value 
     rowNum += 1
     test = sheet['A' + str(rowNum)] 
     if test.value == None: 
-        x = p
+        x = rowNum
         break
 
 #write the data to the new sheet
@@ -63,7 +63,7 @@ while n <= 4:
         sheet[dateCell] = time.strftime('%x', time.gmtime()) #prints date in format mm/dd/yy
         x += 1       
     n += 1
-    x = p
+    x = rowNum
 
 print('Data copied from', filename1, 'to', filename2)
         
