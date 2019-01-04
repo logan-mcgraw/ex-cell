@@ -1,7 +1,7 @@
 #Logan McGraw
 #Ex-cell, 1/3/19
 
-import openpyxl
+import openpyxl, time
 from openpyxl import load_workbook
 from openpyxl import Workbook
 
@@ -58,9 +58,9 @@ n = 0
 while n <= 4:
     for i in lists[n]:
         cell = cs[n] + str(x)
-        dateCell = 'B' + str(x)
+        dateCell = 'B' + str(x) #had to add date manually
         sheet[cell] = i
-        sheet[dateCell] = time.strftime('%x', time.gmtime())
+        sheet[dateCell] = time.strftime('%x', time.gmtime()) #prints date in format mm/dd/yy
         x += 1       
     n += 1
     x = p
