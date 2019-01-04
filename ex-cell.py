@@ -1,28 +1,34 @@
-import openpyxl, time
+#Logan McGraw
+#Ex-cell, 1/3/19
+
+import openpyxl
 from openpyxl import load_workbook
 from openpyxl import Workbook
 
-filename1 = input('Spreadsheet to write from     ') + str('.xlsx')
+#open the desired spreadsheets
+filename1 = input('Spreadsheet to write from: \n') #this needs to include the file extension (.xlsx, .xlsm, etc)
 wb1 = load_workbook(filename1)
 source = wb1.active
 
-filename2 = input('Spreadsheet to write to     ') + str('.xlsx') #replace with master sheet name
+filename2 = input('Spreadsheet to write to: \n') + str('.xlsx')
 wb2 = load_workbook(filename2)
 sheet = wb2.active
 
-#data specific to my sheets, change if using other sheets
+#set up empty data lists(data specific to my sheets)
 sampleName = []
 pressure = []
 thickness = []
 thermCond = []
 RA = []
 
+#columns containing the desired data in the source spreadsheet
 name = source['A']
 p = source['F']
 thicc = source['E']
 TC = source['H']
 ra = source['C']
 
+#new lists help for iteration later
 columns = [name, p, thicc, TC, ra]
 lists = [sampleName, pressure, thickness, thermCond, RA]
 cs = ['A', 'C', 'D', 'E', 'F']
@@ -30,27 +36,22 @@ cs = ['A', 'C', 'D', 'E', 'F']
 n = 0
 
 #move data from source sheet to lists
-while n <= 4:
+while n <= 1-len(cs): 
     for i in columns[n]:
         lists[n] += [i.value]
     del lists[n][0] #removes title from top of data
     n += 1
     
-print()
 
-#alg to find first empty row
-p = 1
-test = sheet['A' + str(p)]
-
-#this loop goes down a column in the sheet until it finds a blank one to start writing data
-#prevents overwriting of previous data
-while test.value != None:
-    p += 1
-    test = sheet['A' + str(p)]
-    if test.value == None:
+#finds first empty row, prevents overwriting existing data in master sheet
+rowNum = 1
+test = sheet['A' + str(rowNum)] #format 'A1' for example
+while test.value != None: #goes down the column until an empty cell (with value None) is found
+    rowNum += 1
+    test = sheet['A' + str(rowNum)] 
+    if test.value == None: 
         x = p
         break
-print('Starting on row', x)
 
 #write the data to the new sheet
 n = 0
@@ -64,12 +65,6 @@ while n <= 4:
     n += 1
     x = p
 
-time.sleep(3) #gives the user the sense that something important is happening
 print('Data copied from', filename1, 'to', filename2)
-input()
-
         
-wb2.save(filename2)
-
-        
-    
+wb2.save(filename2) #saves the master sheet
