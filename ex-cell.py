@@ -10,7 +10,7 @@ filename1 = input('Spreadsheet to write from: \n') #this needs to include the fi
 wb1 = load_workbook(filename1)
 source = wb1.active
 
-filename2 = input('Spreadsheet to write to: \n') + str('.xlsx')
+filename2 = input('Spreadsheet to write to: \n')
 wb2 = load_workbook(filename2)
 sheet = wb2.active
 
